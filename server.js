@@ -1,28 +1,23 @@
-import express from 'express'
+import express from 'express';
+import path from 'path'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
-import path from 'path'
-import {Contact} from './src/Route/contact'
+import ejs from 'ejs'
+import {routes} from './api/routes/index.js'
 const app = express();
 const PORT = 3000;
-// ********* Midllewares 
-app.use(cors());
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
-//app.use(express.static(path.join(__dir,"WHAT EVER"))    usally we call Public files here which may carry images or helper files or .css files etc. 
-app.use('/',Contact()) // Routes as middlewares
-
-//setup mongoose
-mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser: true});
-mongoose.connection.once('open',() =>{
-    console.log('You are now connected to mongoDB locally');
-}).on('error',(errror)=>{
-    console.error(error);
+app.use((req,res,next)=>{
+    console.log(`${req.method}: has been request at URL : ${req.url}`)
+    next();
 })
-
+app.set('view engine','ejs');
+app.use(express.static(path.join(__dirname, 'public')))
+app.use('/',routes());
 app.listen(PORT,()=>{
-    console.log('Express is running at port 3000');
-    
+    try {
+        console.log(`You are listening to PORT: ${PORT}`)
+    } catch (error) {
+        console.error(error)
+    }
 })

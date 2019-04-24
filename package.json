@@ -1,26 +1,40 @@
 {
-  "name": "mern_boilerplate",
+  "name": "full-stack-3",
   "version": "1.0.0",
-  "description": "This is a starter file for any MERN project",
+  "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js --exec babel-node -e js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon --exec babel-node server.js --ignore public/",
+    "clean": "rimraf public",
+    "build": "NODE_ENV=production npm run clean && webpack -wd",
+    "serve": "node dist/server.js"
   },
-  "author": "Vishav K. Singh",
+  "author": "Vishav Singh",
   "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-rc.1",
+    "@babel/core": "7.4.3",
+    "@babel/node": "^7.0.0-rc.1",
+    "@babel/plugin-proposal-class-properties": "^7.0.0-rc.1",
+    "@babel/preset-env": "^7.0.0-rc.1",
+    "@babel/preset-react": "^7.0.0-rc.1",
+    "babel-loader": "^8.0.1",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.6.0",
+    "nodemon": "^1.18.11",
+    "rimraf": "^2.6.3",
+    "webpack": "^4.30.0",
+    "webpack-cli": "^3.3.1",
+    "webpack-dev-server": "^3.3.1"
+  },
   "dependencies": {
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
+    "ejs": "^2.6.1",
     "express": "^4.16.4",
-    "mongoose": "^5.5.2",
-    "nodemon": "^1.18.11",
-    "path": "^0.12.7"
-  },
-  "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1"
+    "mongoose": "^5.5.3",
+    "path": "^0.12.7",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   }
 }
