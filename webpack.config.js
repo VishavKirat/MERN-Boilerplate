@@ -25,6 +25,13 @@ module.exports = {
                 use:{
                     loader:'html-loader'
                 }
+            },
+            {
+                test:/\.html/,
+                exclude:/node_modules/,
+                use:{
+                    loader:'eslint-loader'
+                }
             }
         ]
     },
